@@ -15,7 +15,7 @@ const SHEET_ID = '1g5mWxJsJ09dTTh5MTjdNXnC-aevZ_M0_rHM2uzGZ5xM';
 // shu skriptning web app havolasi (Deploy → Manage deployments) — Telegram yangiliklarni shu yerga yuboradi
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw9UkDTU3-cKmIljEtMR3szTTWMQbmoJkLFaE36kxWZz7A3ucOsLosOmy0TezfDDkyT0w/exec';
 const SITE_URL = 'https://xolodilnikuz.github.io/profpack-sayt/';
-const PHONE = '+998947465959';
+const PHONE = '+998937465959';
 
 // forma maydonlari: [saytdagi nomi, guruh va jadvaldagi sarlavha, belgi]
 const FIELDS = [
@@ -35,7 +35,7 @@ const INFO = {
       'Biz — to‘liq siklli qadoq zavodimiz: makulaturani qayta ishlab, rulon qog‘oz, gofrokarton ' +
       'va logotipingiz bosilgan qutilar tayyorlaymiz.\n\n' +
       '📞 <b>Buyurtma va savollar uchun qo‘ng‘iroq qiling:</b>\n' +
-      '<b>+998 94 746 59 59</b>\n' +
+      '<b>+998 93 746 59 59</b>\n' +
       'Raqamni bosing — qo‘ng‘iroq ochiladi. Pastdagi kontaktni telefoningizga saqlab ham qo‘yishingiz mumkin.\n\n' +
       '🕗 <b>Ish vaqti:</b> har kuni, 08:00–18:00\n' +
       '📍 <b>Manzil:</b> Toshkent sh., Yangihayot tumani, Kanora ko‘chasi, 3-uy',
@@ -46,7 +46,7 @@ const INFO = {
       'Мы — упаковочный завод полного цикла: перерабатываем макулатуру, выпускаем рулонную бумагу, ' +
       'гофрокартон и коробки с вашим логотипом.\n\n' +
       '📞 <b>Заказы и вопросы — звоните:</b>\n' +
-      '<b>+998 94 746 59 59</b>\n' +
+      '<b>+998 93 746 59 59</b>\n' +
       'Нажмите на номер, чтобы позвонить, или сохраните контакт ниже.\n\n' +
       '🕗 <b>Время работы:</b> ежедневно, 08:00–18:00\n' +
       '📍 <b>Адрес:</b> г. Ташкент, Янгихаётский район, ул. Канора, 3',
@@ -104,8 +104,8 @@ function botniSozlash() {
     buyruqRu: tg_('setMyCommands', { commands: [{ command: 'start', description: 'Телефон, время работы и адрес' }], language_code: 'ru' }),
     tavsif: tg_('setMyDescription', { description: 'Profpack — to‘liq siklli qadoq zavodi: rulon qog‘oz, gofrokarton va brendli qutilar.\n\n«Start» tugmasini bosing — aloqa raqamimiz, ish vaqti va manzilimizni yuboramiz.' }),
     tavsifRu: tg_('setMyDescription', { description: 'Profpack — упаковочный завод полного цикла: рулонная бумага, гофрокартон и брендированные коробки.\n\nНажмите «Start» — пришлём телефон, время работы и адрес.', language_code: 'ru' }),
-    qisqa: tg_('setMyShortDescription', { short_description: 'Gofrokarton va brendli qutilar zavodi. Tel: +998 94 746 59 59' }),
-    qisqaRu: tg_('setMyShortDescription', { short_description: 'Завод гофрокартона и брендированных коробок. Тел: +998 94 746 59 59', language_code: 'ru' }),
+    qisqa: tg_('setMyShortDescription', { short_description: 'Gofrokarton va brendli qutilar zavodi. Tel: +998 93 746 59 59' }),
+    qisqaRu: tg_('setMyShortDescription', { short_description: 'Завод гофрокартона и брендированных коробок. Тел: +998 93 746 59 59', language_code: 'ru' }),
   };
   Object.keys(steps).forEach(k => console.log(k + ': ' + (steps[k].ok ? 'ok' : steps[k].description)));
   console.log('Guruh egasi aniqlandi: ' + (props.getProperty('OWNER_ID') ? 'ha' : 'yo‘q'));

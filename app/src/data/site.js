@@ -6,8 +6,8 @@
 
 // telefon: display — ekranda ko‘rinishi, tel — tel: havolasi uchun (bo‘shliqsiz)
 export const PHONE = {
-  display: '+998 94 746 59 59',
-  tel: '+998947465959',
+  display: '+998 93 746 59 59',
+  tel: '+998937465959',
 };
 
 // Telegram bot: url — havola, handle — ekranda ko‘rinadigan nomi
