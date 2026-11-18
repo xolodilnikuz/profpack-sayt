@@ -77,8 +77,9 @@ export default function Calculator() {
           <p className="calc__lead">{t(T.lead)}</p>
           <div className="calc__sheet-wrap" aria-hidden="true">
             <div className="calc__sheet kraft-tex" id="calc-sheet" ref={sheetRef}>
-              <span className="calc__dim calc__dim--l" id="calc-dim-l">{L ? `${fmt(L, 0)} ${t(T.units.mm)}` : ''}</span>
-              <span className="calc__dim calc__dim--w" id="calc-dim-w">{Wd ? `${fmt(Wd, 0)} ${t(T.units.mm)}` : ''}</span>
+              {/* suppressHydrationWarning: sonlar Intl bilan yoziladi — tayyor HTML (Node) va brauzer yozuvi farq qilsa ham xato chiqmaydi */}
+              <span className="calc__dim calc__dim--l" id="calc-dim-l" suppressHydrationWarning>{L ? `${fmt(L, 0)} ${t(T.units.mm)}` : ''}</span>
+              <span className="calc__dim calc__dim--w" id="calc-dim-w" suppressHydrationWarning>{Wd ? `${fmt(Wd, 0)} ${t(T.units.mm)}` : ''}</span>
             </div>
           </div>
           <p className="calc__formula">{t(T.formula)}</p>
@@ -86,7 +87,7 @@ export default function Calculator() {
         <div className="box-side kraft-tex">
           <div className="label calc__card">
             <div className="label__top">
-              <div className="label__to">{t(T.rate)}<b className="calc__rate" id="calc-rate">{money(rate)}</b></div>
+              <div className="label__to">{t(T.rate)}<b className="calc__rate" id="calc-rate" suppressHydrationWarning>{money(rate)}</b></div>
               <div className="barcode" aria-hidden="true"></div>
             </div>
             <form id="calc-form" noValidate onSubmit={e => e.preventDefault()}>
@@ -107,9 +108,9 @@ export default function Calculator() {
               {/* yetkazib berish faqat quti uchun */}
               <label className="calc__check" id="calc-ship-row" hidden={!box}><input type="checkbox" id="c-ship" checked={shipOn} onChange={e => setShipOn(e.target.checked)} /><span>{t(T.ship)}</span></label>
               <dl className="calc__out" aria-live="polite">
-                <div><dt>{t(T.area)}</dt><dd id="calc-area">{quote ? `${fmt(L * Wd / 1e6, 4)} ${t(T.units.m2)}` : '—'}</dd></div>
-                <div><dt>{t(T.unit)}</dt><dd id="calc-unit">{quote ? money(quote.unit) : '—'}</dd></div>
-                <div className="calc__total"><dt>{t(T.total)}</dt><dd id="calc-total">{quote && Q ? money(quote.total) : '—'}</dd></div>
+                <div><dt>{t(T.area)}</dt><dd id="calc-area" suppressHydrationWarning>{quote ? `${fmt(L * Wd / 1e6, 4)} ${t(T.units.m2)}` : '—'}</dd></div>
+                <div><dt>{t(T.unit)}</dt><dd id="calc-unit" suppressHydrationWarning>{quote ? money(quote.unit) : '—'}</dd></div>
+                <div className="calc__total"><dt>{t(T.total)}</dt><dd id="calc-total" suppressHydrationWarning>{quote && Q ? money(quote.total) : '—'}</dd></div>
               </dl>
               <p className="calc__note" id="calc-note">{t(T.note[box ? (ship ? 'ship' : 'noship') : 'blank'])}</p>
               <a className="btn btn--navy" href="#aloqa" id="calc-order" onClick={onOrder}>{t(T.order)}</a>

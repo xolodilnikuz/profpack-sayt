@@ -33,6 +33,17 @@ Kerak bo‘ladi: [Node.js](https://nodejs.org) 18 yoki undan yangi.
 (≈65 MB, 3 000 dan ortiq fayl) ham OneDrive'ga yuklanadi. Ishlaydi, lekin sekinlashtiradi. Repozitoriyni OneDrive'dan
 tashqaridagi papkaga (masalan, `C:\dev\profpack-sayt`) klonlab, o‘sha yerda ishlash qulayroq.
 
+## Tayyor HTML (qidiruv tizimlari uchun)
+
+`npm run build` sahifani bir marta Node'da chizib, natijani `index.html` ichiga yozadi (`vite.config.js` → `prerender`,
+`src/entry-server.jsx`). Shuning uchun sahifa matni JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari uni o‘qiydi,
+sekin internetda matn darhol ko‘rinadi. Brauzerda React shu tayyor HTML'ni "jonlantiradi" (`src/main.jsx`).
+
+- Tayyor HTML — o‘zbekcha (asosiy til). Ruscha yoki inglizcha tanlangan bo‘lsa, sahifa o‘sha tilda qayta chiziladi.
+- Buning uchun alohida hech narsa qilish shart emas: matnni o‘zgartirib `npm run build` qilsangiz, tayyor HTML ham yangilanadi.
+- Komponent chizilayotganda (`return` dan oldin) `window`, `document`, `localStorage` ishlatilmasin — ular faqat
+  `useEffect` yoki hodisa ishlovchilari (onClick …) ichida bo‘lsin, aks holda build xato beradi.
+
 ## Saytga chiqarish
 
 1. `app/` ichida o‘zgartiring, `npm run dev` bilan tekshiring.

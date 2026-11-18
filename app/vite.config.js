@@ -1,9 +1,11 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { createLogger, defineConfig } from 'vite';
+import { createLogger, createServer, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { SITE_URL } from './src/data/site.js';
 
+const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_DIR = fileURLToPath(new URL('./public', import.meta.url));
 
 // `npm run build` (app/ ichida) tayyor saytni repo ildiziga yozadi: index.html, static/, assets/, .nojekyll
@@ -29,6 +31,44 @@ function copyPublic() {
   };
 }
 
+// Tayyor HTML (prerender): build paytida sahifa Node'da bir marta chiziladi (src/entry-server.jsx, o‘zbekcha)
+// va index.html dagi <div id="root"> ichiga yoziladi. Brauzerda React shu HTML'ni "jonlantiradi" (src/main.jsx).
+// Shunda sahifa matni JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari o‘qiydi, sekin internetda darhol ko‘rinadi.
+// Havola ulashilganda chiqadigan rasm (og:image) ham shu yerda to‘liq manzilga aylantiriladi (SITE_URL — src/data/site.js).
+function prerender() {
+  const ROOT_DIV = '<div id="root"></div>';
+  const OG_IMAGE = 'content="assets/profpack-logo.png"';
+  return {
+    name: 'profpack-prerender',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      async handler(html) {
+        for (const part of [ROOT_DIV, OG_IMAGE]) if (!html.includes(part)) throw new Error(`index.html da ${part} topilmadi — prerender qilib bo‘lmadi`);
+        // komponentlarni Node'da ishga tushirish uchun vaqtinchalik Vite serveri (port ochmaydi, fayllarni kuzatmaydi)
+        const server = await createServer({
+          configFile: false,
+          root: ROOT,
+          appType: 'custom',
+          logLevel: 'error',
+          esbuild: { jsx: 'automatic' },
+          server: { middlewareMode: true, hmr: false, watch: null },
+          optimizeDeps: { noDiscovery: true, include: [] },
+        });
+        try {
+          const { render } = await server.ssrLoadModule('/src/entry-server.jsx');
+          const app = render();
+          return html
+            .replace(OG_IMAGE, () => `content="${SITE_URL}assets/profpack-logo.png"`)
+            .replace(ROOT_DIV, () => `<div id="root" data-prerendered>${app}</div>`);
+        } finally {
+          await server.close();
+        }
+      },
+    },
+  };
+}
+
 // Vite natija papkasi kod papkasining ota-papkasi bo‘lsa "(!) build.outDir must not be … a parent directory of root" deb ogohlantiradi.
 // Bu yerda shunday ataylab qilingan: build faqat index.html, static/, assets/ va .nojekyll yozadi, app/ ichiga hech narsa tushmaydi.
 // Shu bitta ogohlantirishni faqat OUT_DIR === '..' bo‘lganda yashiramiz; qolgan barcha xabarlar odatdagidek chiqadi.
@@ -43,7 +83,7 @@ export default defineConfig({
   // nisbiy yo‘llar: sayt istalgan manzilda ishlaydi (GitHub Pages /profpack-sayt/ yoki o‘z domeni)
   base: './',
   customLogger: logger,
-  plugins: [react(), copyPublic()],
+  plugins: [react(), copyPublic(), prerender()],
   build: {
     outDir: OUT_DIR,
     emptyOutDir: false,          // ildizdagi boshqa fayllarga tegmaymiz; eski static/ ni scripts/clean.mjs o‘chiradi

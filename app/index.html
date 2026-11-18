@@ -9,6 +9,7 @@
 <meta name="theme-color" content="#0E1233">
 <meta property="og:title" content="Profpack — to‘liq siklli qadoq zavodi">
 <meta property="og:description" content="Makulaturani qayta ishlaymiz, rulon qog‘oz va gofrokarton ishlab chiqaramiz, quti yasab, logotipingizni bosamiz.">
+<!-- build paytida to‘liq manzilga aylantiriladi (SITE_URL — src/data/site.js): havola ulashilganda rasm shundan olinadi -->
 <meta property="og:image" content="assets/profpack-logo.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2152'/%3E%3Crect x='7' y='7' width='50' height='50' rx='9' fill='none' stroke='white' stroke-width='4'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +25,35 @@
     document.documentElement.lang = l;
   } catch (e) {}
 </script>
+<style>
+  /* Build qilingan sahifada #root ichida tayyor o‘zbekcha HTML bo‘ladi (vite.config.js → prerender).
+     Boshqa tilda (ru/en) React sahifani o‘sha tilda chizguncha uni ko‘rsatmaymiz — til "sakrab" almashmasin. */
+  html:not([lang="uz"]) #root[data-prerendered]{visibility:hidden}
+</style>
+<!-- JavaScript o‘chirilgan bo‘lsa: bosh sarlavha animatsiyasiz, darhol ko‘rinadi.
+     #root — asosiy CSS bu yerdan keyin ulanadi, shuning uchun qoida undan "kuchliroq" bo‘lishi kerak -->
+<noscript><style>#root .hero__title .line{opacity:1;font-stretch:75%;transform:none}</style></noscript>
 </head>
 <body>
 <div id="root"></div>
+<script>
+  // Faqat build qilingan sahifada (tayyor HTML bor bo‘lsa) ishlaydi; `npm run dev` da hammasini React o‘zi qiladi.
+  (function () {
+    var html = document.documentElement, root = document.getElementById('root');
+    if (!root.hasAttribute('data-prerendered')) return;
+    var loaded = function () { requestAnimationFrame(function () { html.classList.add('is-loaded'); }); };
+    if (html.lang === 'uz') {
+      // tayyor o‘zbekcha matn darhol ko‘rinadi: bosh sarlavha animatsiyasi shriftlar yuklangach boshlanadi (ko‘pi bilan 1,2 s)
+      if (document.fonts && window.Promise) Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 1200); })]).then(loaded);
+      else loaded();
+    } else {
+      // boshqa tilda tayyor HTML yashirin turadi. JavaScript 4 soniyada yuklanmasa (sekin internet) — o‘zbekchasini ko‘rsatamiz
+      setTimeout(function () {
+        if (root.hasAttribute('data-prerendered')) { root.removeAttribute('data-prerendered'); loaded(); }
+      }, 4000);
+    }
+  })();
+</script>
 <script type="module" src="/src/main.jsx"></script>
 </body>
 </html>
