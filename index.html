@@ -283,6 +283,7 @@ h3{font-size:clamp(24px,2.1vw,30px);font-stretch:85%;line-height:1.05}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
 .field.is-error{box-shadow:inset 0 -2px 0 #C2362B}
 .form-error{min-height:22px;margin-top:10px;font-size:14px;color:#B02E24}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .label .btn{width:100%;margin-top:6px}
 .form-note{margin-top:12px;font-size:13px;color:#6A6F8C}
 .form-done{padding:36px 24px 40px}
@@ -860,6 +861,7 @@ h3{font-size:clamp(24px,2.1vw,30px);font-stretch:85%;line-height:1.05}
           </div>
           <div class="field"><label for="f-volume">Taxminiy hajm</label><input id="f-volume" name="volume" placeholder="Masalan, 5 000 dona yoki 2 tonna"></div>
           <div class="field"><label for="f-note">Izoh</label><textarea id="f-note" name="note" rows="2" placeholder="O‘lcham, qatlam, bosma ranglari…"></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>
           <p class="form-error" id="form-error" role="alert"></p>
           <button class="btn btn--navy" type="submit">So‘rov yuborish</button>
           <p class="form-note">Ma’lumotlaringiz faqat buyurtma bo‘yicha aloqa uchun ishlatiladi.</p>
@@ -898,7 +900,8 @@ h3{font-size:clamp(24px,2.1vw,30px);font-stretch:85%;line-height:1.05}
 <!-- ===== UI ===== -->
 <script>
 (() => {
-  // So‘rovlarni qabul qiluvchi manzil (backend yoki Telegram-bot proksi). Bo‘sh bo‘lsa, forma faqat ekranda tasdiq ko‘rsatadi.
+  // So‘rovlarni qabul qiluvchi Google Apps Script havolasi (…/exec) — u so‘rovni Telegram guruhga va Google Sheets'ga yozadi.
+  // Bo‘sh bo‘lsa, forma mijozga qo‘ng‘iroq qilishni so‘raydi (so‘rov yo‘qolib ketmasligi uchun).
   const FORM_ENDPOINT = '';
 
   const $ = (s, r = document) => r.querySelector(s);
@@ -1288,14 +1291,17 @@ h3{font-size:clamp(24px,2.1vw,30px);font-stretch:85%;line-height:1.05}
     uz: {
       phone: 'Telefon raqamini to‘liq kiriting, masalan: +998 90 123 45 67.',
       fail: 'So‘rov yuborilmadi. Qayta urinib ko‘ring yoki +998 94 746 59 59 raqamiga qo‘ng‘iroq qiling.',
+      off: 'Onlayn so‘rov hozircha ishlamayapti. Iltimos, +998 94 746 59 59 raqamiga qo‘ng‘iroq qiling.',
     },
     ru: {
       phone: 'Введите номер телефона полностью, например: +998 90 123 45 67.',
       fail: 'Заявка не отправлена. Попробуйте ещё раз или позвоните по номеру +998 94 746 59 59.',
+      off: 'Онлайн-заявка пока не работает. Пожалуйста, позвоните по номеру +998 94 746 59 59.',
     },
     en: {
       phone: 'Please enter the full phone number, for example: +998 90 123 45 67.',
       fail: 'The request was not sent. Please try again or call +998 94 746 59 59.',
+      off: 'Online requests are not available yet. Please call +998 94 746 59 59.',
     },
   };
   const lang = () => (DICT[root.lang] ? root.lang : 'uz');
@@ -1396,14 +1402,15 @@ h3{font-size:clamp(24px,2.1vw,30px);font-stretch:85%;line-height:1.05}
       phoneField.classList.add('is-error'); form.phone.focus();
       return;
     }
+    if (!FORM_ENDPOINT) { showErr('off'); return; }   // forma hali ulanmagan — soxta «yuborildi» ko‘rsatmaymiz
     const btn = form.querySelector('[type=submit]');
     btn.disabled = true;
     try {
-      if (FORM_ENDPOINT) {
-        const payload = { ...Object.fromEntries(new FormData(form)), lang: root.lang };
-        const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-        if (!res.ok) throw new Error(res.status);
-      }
+      const payload = { ...Object.fromEntries(new FormData(form)), lang: root.lang, page: location.href };
+      // text/plain: Google Apps Script CORS «preflight» so‘rovini qabul qilmaydi
+      const res = await fetch(FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+      const out = await res.json().catch(() => null);
+      if (!res.ok || !out || !out.ok) throw new Error(res.status);
       form.hidden = true; done.hidden = false;
       done.focus({ preventScroll: true }); done.scrollIntoView({ block: 'center', behavior: 'smooth' });
     } catch {
