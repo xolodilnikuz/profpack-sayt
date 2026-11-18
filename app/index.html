@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- sarlavha va tavsif tilga qarab src/i18n/texts/meta.js dan almashtiriladi; bu yerda — o‘zbekcha (asosiy) -->
+<title>Profpack — makulaturadan brendli qutigacha</title>
+<meta name="description" content="Profpack — to‘liq siklli qadoq zavodi: makulaturani qayta ishlash, rulon qog‘oz, gofrokarton, gofroqutilar va brendli bosma qutilar.">
+<meta name="theme-color" content="#0E1233">
+<meta property="og:title" content="Profpack — to‘liq siklli qadoq zavodi">
+<meta property="og:description" content="Makulaturani qayta ishlaymiz, rulon qog‘oz va gofrokarton ishlab chiqaramiz, quti yasab, logotipingizni bosamiz.">
+<meta property="og:image" content="assets/profpack-logo.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231B2152'/%3E%3Crect x='7' y='7' width='50' height='50' rx='9' fill='none' stroke='white' stroke-width='4'/%3E%3Ctext x='32' y='45' font-family='Arial' font-weight='700' font-size='34' text-anchor='middle' fill='white'%3EP%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Saira:wdth,wght@50..100,500..800&family=Tektur:wdth,wght@75..100,500..800&display=swap">
+<script>
+  // til: ?lang= → saqlangan tanlov → brauzer tili (inglizcha faqat tanlansa — mahalliy mijozlar uchun asosiy til o‘zbekcha)
+  // React yuklanishidan oldin ishlaydi: <html lang> darhol to‘g‘ri bo‘ladi (ruscha sarlavha shrifti miltillamaydi).
+  // Xuddi shu tartib src/i18n/lang.js da ham bor.
+  try {
+    var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('pp-lang');
+    if (l !== 'ru' && l !== 'uz' && l !== 'en') l = /^ru\b/i.test(navigator.language || '') ? 'ru' : 'uz';
+    document.documentElement.lang = l;
+  } catch (e) {}
+</script>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
