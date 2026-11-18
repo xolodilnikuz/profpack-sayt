@@ -52,3 +52,11 @@ sekin internetda matn darhol ko‘rinadi. Brauzerda React shu tayyor HTML'ni "jo
 4. GitHub Pages taxminan bir daqiqada yangilanadi.
 
 **Diqqat:** ildizdagi `index.html` va `static/` qo‘lda tahrirlanmaydi — keyingi `npm run build` ularni qayta yozadi.
+
+## Vercel
+
+Loyiha Vercel'da ham yig‘iladi (sozlamalar — `vercel.json`). Vercel `npm run build` ni o‘zi ishga tushiradi va tayyor
+saytni `app/dist` dan oladi; repo ildizidagi `index.html` va `static/` unga kerak emas (ular GitHub Pages uchun).
+
+- Qo‘lda chiqarish: `cd app` → `npx vercel deploy --prod` (birinchi marta `npx vercel login`).
+- Vercel loyihasi GitHub repozitoriyga ulangan bo‘lsa, Root Directory — `app`; har `push` dan keyin sayt o‘zi yangilanadi.

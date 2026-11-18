@@ -8,8 +8,10 @@ import { SITE_URL } from './src/data/site.js';
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_DIR = fileURLToPath(new URL('./public', import.meta.url));
 
-// `npm run build` (app/ ichida) tayyor saytni repo ildiziga yozadi: index.html, static/, assets/, .nojekyll
-const OUT_DIR = '..';
+// Tayyor sayt qayerga yoziladi:
+//  • kompyuterda `npm run build` (app/ ichida) — repo ildiziga: index.html, static/, assets/, .nojekyll (GitHub Pages shuni ko‘rsatadi);
+//  • Vercel'da (u VERCEL muhit o‘zgaruvchisini qo‘yadi) — app/dist ga (vercel.json dagi outputDirectory).
+const OUT_DIR = process.env.VERCEL ? 'dist' : '..';
 
 // public/ dagi fayllarni (assets/profpack-logo.png, .nojekyll) build natijasiga o‘zimiz qo‘shamiz.
 // Sabab: natija repo ildiziga yoziladi va public/ shu papka ichida qoladi —
