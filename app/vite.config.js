@@ -36,10 +36,14 @@ function copyPublic() {
 // Tayyor HTML (prerender): build paytida sahifa Node'da bir marta chiziladi (src/entry-server.jsx, o‘zbekcha)
 // va index.html dagi <div id="root"> ichiga yoziladi. Brauzerda React shu HTML'ni "jonlantiradi" (src/main.jsx).
 // Shunda sahifa matni JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari o‘qiydi, sekin internetda darhol ko‘rinadi.
-// Havola ulashilganda chiqadigan rasm (og:image) ham shu yerda to‘liq manzilga aylantiriladi (SITE_URL — src/data/site.js).
+// Sayt manzili (SITE_URL — src/data/site.js) ham shu yerda yoziladi:
+//  • og:image — havola ulashilganda chiqadigan rasm, to‘liq manzil bilan;
+//  • canonical va og:url — sayt bir nechta manzilda ochilsa ham (o‘z domeni, vercel.app, github.io),
+//    qidiruv tizimlari asosiy manzil sifatida SITE_URL ni oladi.
 function prerender() {
   const ROOT_DIV = '<div id="root"></div>';
   const OG_IMAGE = 'content="assets/profpack-logo.png"';
+  const OG_IMAGE_TAG = '<meta property="og:image"';
   return {
     name: 'profpack-prerender',
     apply: 'build',
@@ -62,6 +66,7 @@ function prerender() {
           const app = render();
           return html
             .replace(OG_IMAGE, () => `content="${SITE_URL}assets/profpack-logo.png"`)
+            .replace(OG_IMAGE_TAG, () => `<link rel="canonical" href="${SITE_URL}">\n<meta property="og:url" content="${SITE_URL}">\n${OG_IMAGE_TAG}`)
             .replace(ROOT_DIV, () => `<div id="root" data-prerendered>${app}</div>`);
         } finally {
           await server.close();

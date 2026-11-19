@@ -14,7 +14,7 @@
 const SHEET_ID = '1g5mWxJsJ09dTTh5MTjdNXnC-aevZ_M0_rHM2uzGZ5xM';
 // shu skriptning web app havolasi (Deploy → Manage deployments) — Telegram yangiliklarni shu yerga yuboradi
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw9UkDTU3-cKmIljEtMR3szTTWMQbmoJkLFaE36kxWZz7A3ucOsLosOmy0TezfDDkyT0w/exec';
-const SITE_URL = 'https://xolodilnikuz.github.io/profpack-sayt/';
+const SITE_URL = 'https://www.profpack.uz/';
 const PHONE = '+998937465959';
 
 // forma maydonlari: [saytdagi nomi, guruh va jadvaldagi sarlavha, belgi]

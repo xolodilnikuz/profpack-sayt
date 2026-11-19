@@ -35,5 +35,6 @@ export const HOURS = {
 // (backend kodi: apps-script/Code.gs). Bo‘sh bo‘lsa, forma mijozga qo‘ng‘iroq qilishni so‘raydi (so‘rov yo‘qolib ketmasligi uchun).
 export const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw9UkDTU3-cKmIljEtMR3szTTWMQbmoJkLFaE36kxWZz7A3ucOsLosOmy0TezfDDkyT0w/exec';
 
-// saytning ochiq manzili (apps-script/Code.gs dagi SITE_URL bilan bir xil bo‘lsin; bot shu havolani yuboradi)
-export const SITE_URL = 'https://xolodilnikuz.github.io/profpack-sayt/';
+// saytning asosiy manzili (oxirida "/" bilan). Build paytida index.html ga yoziladi: canonical, og:url, og:image.
+// apps-script/Code.gs dagi SITE_URL bilan bir xil bo‘lsin — Telegram bot shu havolani yuboradi.
+export const SITE_URL = 'https://www.profpack.uz/';
