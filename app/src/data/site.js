@@ -49,9 +49,10 @@ export const BUSINESS = {
 // Qidiruv tizimlarida sayt egasi ekaningizni tasdiqlash kodlari:
 //   • Google Search Console → «HTML-тег» usuli: <meta name="google-site-verification" content="KOD"> — KOD ni google ga yozing;
 //   • Yandex Webmaster → «Мета-тег» usuli: <meta name="yandex-verification" content="KOD"> — KOD ni yandex ga yozing.
-// Build ularni uchala sahifaga qo‘yadi; bo‘sh bo‘lsa, hech narsa qo‘shilmaydi.
+// Build ularni hamma sahifaga qo‘yadi; bo‘sh bo‘lsa, hech narsa qo‘shilmaydi.
+// Diqqat: kod olib tashlansa, Search Console saytni "tasdiqlanmagan" deb belgilaydi — o‘chirmang.
 export const VERIFY = {
-  google: '',
+  google: '-fG_y5XWhtrvyuUnPGdlXNQh_8u_FGJvieCDZjjLAP8',   // https://www.profpack.uz/ (Search Console, 2026-11-19)
   yandex: '',
 };
 
