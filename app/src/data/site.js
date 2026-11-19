@@ -39,12 +39,20 @@ export const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw9UkDTU3-
 // Sahifada ko‘rinib turgan ma’lumot (aloqa bo‘limi) bilan bir xil bo‘lishi kerak; manzil qismlarga bo‘lingan.
 export const BUSINESS = {
   name: 'Profpack',
-  description: 'To‘liq siklli qadoq zavodi: makulaturani qayta ishlash, rulon qog‘oz, gofrokarton, gofroqutilar va brendli bosma qutilar.',
   street: 'Kanora ko‘chasi, 3-uy, Yangihayot tumani',
   city: 'Toshkent',
   country: 'UZ',
   opens: '08:00',     // har kuni
   closes: '18:00',
+};
+
+// Qidiruv tizimlarida sayt egasi ekaningizni tasdiqlash kodlari:
+//   • Google Search Console → «HTML-тег» usuli: <meta name="google-site-verification" content="KOD"> — KOD ni google ga yozing;
+//   • Yandex Webmaster → «Мета-тег» usuli: <meta name="yandex-verification" content="KOD"> — KOD ni yandex ga yozing.
+// Build ularni uchala sahifaga qo‘yadi; bo‘sh bo‘lsa, hech narsa qo‘shilmaydi.
+export const VERIFY = {
+  google: '',
+  yandex: '',
 };
 
 // saytning asosiy manzili (oxirida "/" bilan). Build paytida index.html ga yoziladi: canonical, og:url, og:image.

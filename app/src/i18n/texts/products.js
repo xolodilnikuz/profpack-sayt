@@ -4,7 +4,7 @@ import { NEED } from './contact.js';
 export const products = {
   title: { uz: 'Mahsulotlar', ru: 'Продукция', en: 'Products' },
   lead: {
-    uz: 'Zanjirning har bir bo‘g‘inini alohida ham sotamiz: rulon qog‘ozdan tortib brendli qutigacha. Narx hajm va texnik talablarga qarab hisoblanadi.',
+    uz: 'Zanjirning har bir bo‘g‘inini alohida ham sotamiz: rulon qog‘ozdan tortib brendli karobkagacha. Narx hajm va texnik talablarga qarab hisoblanadi.',
     ru: 'Каждое звено цепочки продаём и отдельно: от рулонной бумаги до коробок с вашим брендом. Цена рассчитывается по объёму и техническим требованиям.',
     en: 'We also sell every link of the chain separately, from paper rolls to branded boxes. Prices depend on volume and technical requirements.',
   },
@@ -48,11 +48,11 @@ export const products = {
     {
       art: 'box',
       need: NEED.boxes,
-      title: { uz: 'Gofroqutilar', ru: 'Гофрокороба', en: 'Corrugated boxes' },
+      title: { uz: 'Gofroqutilar (karton karobkalar)', ru: 'Гофрокороба (картонные коробки)', en: 'Corrugated cardboard boxes' },
       text: {
-        uz: 'To‘rt klapanli qutilar (FEFCO 0201), o‘zi yig‘iladigan qutilar (FEFCO 0427), lotoklar, panjaralar va qistirmalar — logistika, oziq-ovqat va savdo uchun.',
-        ru: 'Четырёхклапанные коробки (FEFCO 0201), самосборные коробки (FEFCO 0427), лотки, решётки и вкладыши — для логистики, продуктов питания и торговли.',
-        en: 'Four-flap boxes (FEFCO 0201), self-assembly boxes (FEFCO 0427), trays, partitions and inserts for logistics, food and retail.',
+        uz: 'Gofra karton karobkalar: to‘rt klapanli (FEFCO 0201), o‘zi yig‘iladigan (FEFCO 0427), lotoklar, panjaralar va qistirmalar — logistika, oziq-ovqat va savdo uchun.',
+        ru: 'Картонные коробки из гофрокартона: четырёхклапанные (FEFCO 0201), самосборные (FEFCO 0427), лотки, решётки и вкладыши — для логистики, продуктов питания и торговли.',
+        en: 'Corrugated cardboard boxes: four-flap (FEFCO 0201), self-assembly (FEFCO 0427), trays, partitions and inserts for logistics, food and retail.',
       },
       spec: [
         [{ uz: 'Turi', ru: 'Тип', en: 'Type' }, { uz: 'FEFCO katalogi bo‘yicha', ru: 'По каталогу FEFCO', en: 'Per the FEFCO code' }],
@@ -62,9 +62,9 @@ export const products = {
     {
       art: 'branded',
       need: NEED.branded,
-      title: { uz: 'Brendli qutilar', ru: 'Коробки с логотипом', en: 'Branded boxes' },
+      title: { uz: 'Brendli qutilar (logotipli karobkalar)', ru: 'Коробки с логотипом', en: 'Branded boxes' },
       text: {
-        uz: 'Logotip, markirovka va manipulyatsion belgilar bosilgan qutilar — mahsulotingiz javonda ham, omborda ham tanilib turadi.',
+        uz: 'Logotip, markirovka va manipulyatsion belgilar bosilgan karobkalar — mahsulotingiz javonda ham, omborda ham tanilib turadi.',
         ru: 'Коробки с логотипом, маркировкой и манипуляционными знаками — ваш товар узнают и на полке, и на складе.',
         en: 'Boxes printed with your logo, markings and handling symbols, so your product stands out on the shelf and in the warehouse.',
       },

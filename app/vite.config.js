@@ -3,8 +3,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLogger, createServer, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { BUSINESS, PHONE, SITE_URL } from './src/data/site.js';
+import { BUSINESS, PHONE, SITE_URL, VERIFY } from './src/data/site.js';
 import { DEFAULT_LANG, LANGS } from './src/i18n/lang.js';
+import { faq } from './src/i18n/texts/faq.js';
 import { meta } from './src/i18n/texts/meta.js';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
@@ -88,6 +89,13 @@ function jsonLd(lang) {
         contactPoint: { '@type': 'ContactPoint', telephone: PHONE.tel, contactType: 'sales', availableLanguage: LANGS },
         areaServed: BUSINESS.country,
       },
+      // sahifadagi «Ko‘p so‘raladigan savollar» bo‘limi (src/i18n/texts/faq.js) — savol-javoblar shu tilda
+      {
+        '@type': 'FAQPage',
+        '@id': `${pageUrl(lang)}#faq`,
+        inLanguage: lang,
+        mainEntity: faq.items.map(item => ({ '@type': 'Question', name: item.q[lang], acceptedAnswer: { '@type': 'Answer', text: item.a[lang] } })),
+      },
     ],
   };
   // "<" belgisi skript ichida HTML tegi bo‘lib qolmasligi uchun almashtiriladi
@@ -110,7 +118,10 @@ function pageHtml(template, lang, app) {
     `<meta property="og:locale" content="${OG_LOCALE[lang]}">`,
     // og:image — havola ulashilganda chiqadigan rasm, to‘liq manzil bilan
     `<meta property="og:image" content="${SITE_URL}assets/profpack-logo.png">`,
-  ].join('\n');
+    // sayt egasini tasdiqlash kodlari (VERIFY — src/data/site.js); bo‘sh bo‘lsa, qo‘shilmaydi
+    VERIFY.google && `<meta name="google-site-verification" content="${esc(VERIFY.google)}">`,
+    VERIFY.yandex && `<meta name="yandex-verification" content="${esc(VERIFY.yandex)}">`,
+  ].filter(Boolean).join('\n');
 
   let html = template;
   html = swap(html, /<html lang="uz">/, () => `<html lang="${lang}" data-page="${lang}">`, '<html lang="uz">');

@@ -1,7 +1,42 @@
 // «Ko‘p so‘raladigan savollar» bo‘limi: q — savol, a — javob.
+// Birinchi uchta savol odamlar qidiruvda yozadigan so‘zlar bilan boshlanadi (karobka narxi, o‘lcham, logotip) —
+// qidiruv tizimlari shu savol-javoblarni ham o‘qiydi (build ularni FAQPage ko‘rinishida ham yozadi, vite.config.js).
+import { PRICES } from '../../data/prices.js';
+
+// 1 m² narx oralig‘i kalkulyator jadvalidan (src/data/prices.js) olinadi — narx o‘zgarsa, bu yerdagi matn ham o‘zi yangilanadi
+const boxRates = Object.values(PRICES).filter(p => p[1]);
+const PRICE_MIN = Math.min(...boxRates.map(p => p[1]));   // eng arzon marka, yetkazib berishsiz
+const PRICE_MAX = Math.max(...boxRates.map(p => p[2]));   // eng qimmat marka, yetkazib berish bilan
+// 3800 → "3 800" (uz, ru) yoki "3,800" (en); bo‘shliq — ajralmaydigan, son qatordan qatorga bo‘linmaydi
+const num = (n, sep) => String(n).replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+
 export const faq = {
   title: { uz: 'Ko‘p so‘raladigan savollar', ru: 'Частые вопросы', en: 'Frequently asked questions' },
   items: [
+    {
+      q: { uz: 'Karobka narxi qancha?', ru: 'Сколько стоит коробка?', en: 'How much does a box cost?' },
+      a: {
+        uz: `Narx karton markasi va karobka yoyilmasining o‘lchamiga bog‘liq: 1 m² uchun ${num(PRICE_MIN, ' ')} so‘mdan ${num(PRICE_MAX, ' ')} so‘mgacha — markaga va yetkazib berishga qarab. Yoyilma uzunligi va enini kalkulyatorga kiriting — bir dona va butun partiya narxi darhol chiqadi.`,
+        ru: `Цена зависит от марки картона и размеров развёртки коробки: от ${num(PRICE_MIN, ' ')} до ${num(PRICE_MAX, ' ')} сум за 1 м² — в зависимости от марки и доставки. Введите длину и ширину развёртки в калькулятор — он сразу покажет цену за штуку и за всю партию.`,
+        en: `The price depends on the board grade and the size of the box blank: from ${num(PRICE_MIN, ',')} to ${num(PRICE_MAX, ',')} UZS per m², depending on the grade and delivery. Enter the blank length and width in the calculator to see the price per box and for the whole batch.`,
+      },
+    },
+    {
+      q: { uz: 'Karobkani o‘z o‘lchamimda buyurtma qilsam bo‘ladimi?', ru: 'Можно ли заказать коробки по своим размерам?', en: 'Can I order boxes in my own size?' },
+      a: {
+        uz: 'Ha. Karobkalar buyurtmachining o‘lchami bo‘yicha tayyorlanadi: uzunlik × eni × balandlikni, mahsulot og‘irligini va kerakli sonni yozing — mos karton markasi va konstruksiyani (FEFCO) tanlab beramiz.',
+        ru: 'Да. Коробки изготавливаем по размерам заказчика: укажите длину × ширину × высоту, вес товара и нужное количество — подберём марку картона и конструкцию (FEFCO).',
+        en: 'Yes. Boxes are made to the customer’s dimensions: send the length × width × height, the product weight and the quantity, and we will choose the board grade and design (FEFCO).',
+      },
+    },
+    {
+      q: { uz: 'Karobkaga logotip bosib berasizmi?', ru: 'Печатаете ли вы логотип на коробках?', en: 'Do you print logos on boxes?' },
+      a: {
+        uz: 'Ha. Logotip, dizayn va markirovka karobkaga fleksografik usulda bosiladi — shtrix- va QR-kodlar, manipulyatsion belgilar ham. Maketingizni yuboring: ranglar maket bo‘yicha tanlanadi.',
+        ru: 'Да. Логотип, дизайн и маркировку наносим на коробки флексографской печатью — включая штрих- и QR-коды и манипуляционные знаки. Пришлите макет: цвета подбираем по макету.',
+        en: 'Yes. Your logo, design and markings are flexo-printed on the boxes, including barcodes, QR codes and handling symbols. Send your artwork: the colours follow the artwork.',
+      },
+    },
     {
       q: { uz: 'E, B va C profillar nimasi bilan farq qiladi?', ru: 'Чем отличаются профили E, B и C?', en: 'What is the difference between E, B and C flutes?' },
       a: {

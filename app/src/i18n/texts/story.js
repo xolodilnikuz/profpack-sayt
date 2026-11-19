@@ -14,9 +14,9 @@ export const hero = {
     { uz: 'brendli qutigacha', ru: 'до фирменной коробки', en: 'to branded boxes' },
   ],
   lead: {
-    uz: 'Profpack — to‘liq siklli qadoq zavodi. Makulaturani qayta ishlaymiz, rulon qog‘oz va gofrokarton ishlab chiqaramiz, undan quti yasab, logotipingizni bosamiz.',
-    ru: 'Profpack — завод упаковки полного цикла. Перерабатываем макулатуру, выпускаем рулонную бумагу и гофрокартон, делаем из него коробки и печатаем на них ваш логотип.',
-    en: 'Profpack is a full-cycle packaging plant. We recycle waste paper, produce paper rolls and corrugated board, turn it into boxes and print your logo on them.',
+    uz: 'Profpack — Toshkentdagi to‘liq siklli qadoq zavodi. Makulaturani qayta ishlaymiz, rulon qog‘oz va gofrokarton ishlab chiqaramiz, undan karobka (quti) yasab, logotipingizni bosamiz.',
+    ru: 'Profpack — завод упаковки полного цикла в Ташкенте. Перерабатываем макулатуру, выпускаем рулонную бумагу и гофрокартон, делаем из него картонные коробки и печатаем на них ваш логотип.',
+    en: 'Profpack is a full-cycle packaging plant in Tashkent. We recycle waste paper, produce paper rolls and corrugated board, turn it into cardboard boxes and print your logo on them.',
   },
   see: { uz: 'Jarayonni ko‘rish', ru: 'Смотреть процесс', en: 'See the process' },
   cue: { uz: 'Aylantiring — quti qanday tug‘ilishini ko‘rasiz', ru: 'Листайте — увидите, как рождается коробка', en: 'Scroll to see how a box is born' },
@@ -71,9 +71,9 @@ export const steps = [
   },
   {
     tracker: { uz: 'Quti', ru: 'Коробка', en: 'Box' },
-    title: { uz: 'Quti yasash', ru: 'Изготовление коробок', en: 'Box making' },
+    title: { uz: 'Karobka (quti) yasash', ru: 'Изготовление коробок', en: 'Box making' },
     text: {
-      uz: 'Gofrokarton listlari o‘lchamga kesiladi, bigovka qilinadi, kerak bo‘lsa shtamp bilan kesiladi (vysechka) va yelimlanadi. Standart to‘rt klapanli qutidan (FEFCO 0201) o‘zi yig‘iladigan qutilar, lotoklar va panjaralargacha.',
+      uz: 'Gofrokarton listlari o‘lchamga kesiladi, bigovka qilinadi, kerak bo‘lsa shtamp bilan kesiladi (vysechka) va yelimlanadi. Standart to‘rt klapanli karobkadan (FEFCO 0201) o‘zi yig‘iladigan qutilar, lotoklar va panjaralargacha.',
       ru: 'Листы гофрокартона раскраивают по размеру, бигуют, при необходимости вырубают штампом (высечка) и склеивают. От стандартной четырёхклапанной коробки (FEFCO 0201) до самосборных коробок, лотков и решёток.',
       en: 'Corrugated sheets are cut to size, creased, die-cut where needed and glued. From the standard four-flap box (FEFCO 0201) to self-assembly boxes, trays and partitions.',
     },
