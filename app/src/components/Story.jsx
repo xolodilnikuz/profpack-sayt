@@ -22,7 +22,7 @@ function StageFallback() {
 // Sahna orqada "yopishib" turadi, ustidan bosh ekran va 5 bosqich paneli aylanadi.
 // Panellar joylashuvidan S qiymati (0 — bosh ekran … 5 — pechat) hisoblanadi; 3D sahna ham shundan foydalanadi.
 export default function Story() {
-  const { t, lang } = useLang();
+  const { t, lang, href } = useLang();
   const pickNeed = usePickNeed();
   const storyRef = useRef(null);
   const trackerRef = useRef(null);
@@ -93,6 +93,8 @@ export default function Story() {
               <h2 className="step__title">{t(step.title)}</h2>
               <p className="step__text">{t(step.text)}</p>
               <ul className="tags">{step.tags.map((tag, j) => <li key={j}>{t(tag)}</li>)}</ul>
+              {/* shu bosqich mahsulotining alohida sahifasi (karobka, pechat, makulatura …) */}
+              {step.more && <a className="more" href={href(step.more.page)}>{t(step.more.label)}</a>}
               {step.cta && (
                 <div className="actions"><a className="btn btn--kraft" href="#aloqa" onClick={pickNeed(step.cta.need)}>{t(step.cta.label)}</a></div>
               )}

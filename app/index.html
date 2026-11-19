@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- sarlavha va tavsif tilga qarab src/i18n/texts/meta.js dan almashtiriladi; bu yerda — o‘zbekcha (asosiy) -->
 <title>Karobka va gofrokarton ishlab chiqarish — Profpack, Toshkent</title>
-<meta name="description" content="Profpack zavodi, Toshkent: gofra karton karobkalar (qutilar) istalgan o‘lchamda, logotip bosish, gofrokarton va rulon qog‘oz. Tel: +998 93 746 59 59.">
+<meta name="description" content="Profpack zavodi, Toshkent: karton karobkalar istalgan o‘lchamda, karobkaga pechat, gofrokarton, rulon qog‘oz. Makulatura qabul qilamiz. Tel: +998 93 746 59 59.">
 <meta name="theme-color" content="#0E1233">
 <meta property="og:title" content="Profpack — to‘liq siklli qadoq zavodi">
 <meta property="og:description" content="Makulaturani qayta ishlaymiz, rulon qog‘oz va gofrokarton ishlab chiqaramiz, quti yasab, logotipingizni bosamiz.">
@@ -20,15 +20,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Saira:wdth,wght@50..100,500..800&family=Tektur:wdth,wght@75..100,500..800&display=swap">
 <script>
-  // Til: manzil (/ru/, /en/) → ?lang= (eski havolalar) → saqlangan tanlov → brauzer tili (faqat ruscha) → o‘zbekcha.
+  // Til: manzil (/ru/, /en/, /ru/korobki/ …) → ?lang= (eski havolalar) → saqlangan tanlov → brauzer tili (faqat ruscha) → o‘zbekcha.
   // Inglizcha faqat tanlansa yoki /en/ ochilsa — mahalliy mijozlar uchun asosiy til o‘zbekcha.
+  // Qidiruv robotlariga brauzer tili qo‘llanmaydi: ular har manzilda shu manzilning o‘z tilidagi sahifani ko‘radi.
   // React yuklanishidan oldin ishlaydi: <html lang> darhol to‘g‘ri bo‘ladi (ruscha sarlavha shrifti miltillamaydi).
-  // Xuddi shu tartib src/i18n/lang.js da ham bor.
+  // Xuddi shu tartib src/i18n/lang.js da ham bor (build ikkalasi bir xil ishlashini tekshiradi).
   try {
     var html = document.documentElement;
-    var m = location.pathname.match(/^(.*\/)(ru|en)\/?(?:index\.html)?$/);
+    var m = location.pathname.match(/^(.*\/)(ru|en)(?:\/(?:[a-z0-9-]+\/?)?)?(?:index\.html)?$/);
     var l = m ? m[2] : (new URLSearchParams(location.search).get('lang') || localStorage.getItem('pp-lang'));
-    if (l !== 'ru' && l !== 'uz' && l !== 'en') l = /^ru\b/i.test(navigator.language || '') ? 'ru' : 'uz';
+    if (l !== 'ru' && l !== 'uz' && l !== 'en') l = !/bot|crawl|spider/i.test(navigator.userAgent || '') && /^ru\b/i.test(navigator.language || '') ? 'ru' : 'uz';
     // data-page — shu sahifaga yozilgan tayyor HTML tili (build qo‘yadi). Kerakli til boshqa bo‘lsa — pp-swap
     var page = html.getAttribute('data-page');
     if (page && page !== l) html.className += ' pp-swap';

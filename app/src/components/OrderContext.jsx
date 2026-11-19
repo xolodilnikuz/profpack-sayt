@@ -8,14 +8,17 @@ export const EMPTY_ORDER = { name: '', phone: '', company: '', need: NEEDS[0].va
 const FieldsContext = createContext(null);
 const ActionsContext = createContext(null);
 
-export function OrderProvider({ children }) {
-  const [fields, setFields] = useState(EMPTY_ORDER);
+// need — «Nima kerak?» ning boshlang‘ich tanlovi: alohida sahifalarda shu sahifa mavzusi
+// (masalan, «Makulatura» sahifasida — «Makulatura topshirish»); berilmasa — ro‘yxatdagi birinchisi.
+export function OrderProvider({ need, children }) {
+  const empty = useMemo(() => (need ? { ...EMPTY_ORDER, need } : EMPTY_ORDER), [need]);
+  const [fields, setFields] = useState(empty);
   const actions = useMemo(() => ({
     setFields,
     // prefill({ need, volume, note }) — berilgan maydonlarni almashtiradi, qolganlari o‘zgarmaydi
     prefill: patch => setFields(f => ({ ...f, ...patch })),
-    reset: () => setFields(EMPTY_ORDER),
-  }), []);
+    reset: () => setFields(empty),
+  }), [empty]);
   return (
     <ActionsContext.Provider value={actions}>
       <FieldsContext.Provider value={fields}>{children}</FieldsContext.Provider>

@@ -11,10 +11,12 @@ const num = v => { const n = parseInt(v, 10); return n > 0 ? n : 0; };
 
 // ===== Narx kalkulyatori =====
 // uzunlik × eni (mm) ÷ 1 000 000 = m²; m² × markaning 1 m² narxi = 1 dona narxi
-export default function Calculator() {
+// kind — ochilganda tanlangan tur: 'box' (quti) yoki 'blank' (zagotovka). Berilmasa — src/data/prices.js dagi boshlang‘ich qiymat
+// («Gofrokarton» sahifasida kalkulyator zagotovka rejimida ochiladi).
+export default function Calculator({ kind: initialKind = CALC_DEFAULTS.kind }) {
   const { lang, t } = useLang();
   const { prefill } = useOrderActions();
-  const [kind, setKind] = useState(CALC_DEFAULTS.kind);
+  const [kind, setKind] = useState(initialKind);
   const [mark, setMark] = useState(CALC_DEFAULTS.mark);
   const [len, setLen] = useState(CALC_DEFAULTS.len);
   const [wid, setWid] = useState(CALC_DEFAULTS.wid);

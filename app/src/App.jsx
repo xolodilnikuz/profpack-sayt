@@ -1,4 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
+import { HOME } from './data/pages.js';
+import { TOPICS } from './i18n/texts';
 import { OrderProvider } from './components/OrderContext.jsx';
 import Header from './components/Header.jsx';
 import MobileMenu from './components/MobileMenu.jsx';
@@ -12,9 +14,13 @@ import HowToOrder from './components/HowToOrder.jsx';
 import Faq from './components/Faq.jsx';
 import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
+import TopicPage from './components/TopicPage.jsx';
 
-// Sahifa tuzilishi: bo‘limlar tartibi shu yerda. Matnlar — src/i18n/texts/, aloqa — src/data/site.js.
-export default function App() {
+// Sahifa tuzilishi. page — qaysi sahifa: 'home' (bosh sahifa) yoki alohida sahifa (src/data/pages.js dagi id).
+//  • bosh sahifa — bo‘limlar tartibi shu yerda;
+//  • alohida sahifalar (karobka, pechat, makulatura …) — bitta qolipda: src/components/TopicPage.jsx.
+// Matnlar — src/i18n/texts/, aloqa — src/data/site.js.
+export default function App({ page = HOME }) {
   const [menuOpen, setMenuOpen] = useState(false);
   // mobil menyu ochiq bo‘lsa, orqadagi sahifa aylanmaydi (body.menu-open)
   const setMenu = useCallback(open => {
@@ -29,20 +35,26 @@ export default function App() {
     else markLoaded();
   }, []);
 
+  const topic = TOPICS[page];
   return (
-    <OrderProvider>
+    // alohida sahifada so‘rov formasidagi «Nima kerak?» shu sahifa mavzusida turadi
+    <OrderProvider need={topic && topic.need}>
       <Header menuOpen={menuOpen} setMenu={setMenu} />
       <MobileMenu open={menuOpen} setMenu={setMenu} />
       <main>
-        <Story />
-        <Products />
-        <Eco />
-        <Waste />
-        <Why />
-        <Calculator />
-        <HowToOrder />
-        <Faq />
-        <Contact />
+        {topic ? <TopicPage id={page} /> : (
+          <>
+            <Story />
+            <Products />
+            <Eco />
+            <Waste />
+            <Why />
+            <Calculator />
+            <HowToOrder />
+            <Faq />
+            <Contact />
+          </>
+        )}
       </main>
       <Footer />
     </OrderProvider>

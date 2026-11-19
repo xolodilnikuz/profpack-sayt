@@ -12,12 +12,14 @@ export const products = {
   legendCut: { uz: 'kesish chizig‘i', ru: 'линия реза', en: 'cut line' },
   legendFold: { uz: 'bukish chizig‘i', ru: 'линия биговки', en: 'crease line' },
 
-  // art — panel tepasidagi rasm (src/components/Products.jsx dagi ART);
+  // art — panel tepasidagi rasm (src/components/Art.jsx);
+  // page — shu mahsulotning alohida sahifasi (src/data/pages.js dagi id): panel nomi va «Batafsil» shu sahifaga olib boradi;
   // need — «Narxini so‘rash» bosilganda so‘rov formasidagi «Nima kerak?» tanlovi;
   // spec — [nomi, qiymati] juftlari
   items: [
     {
       art: 'roll',
+      page: 'paper',
       need: NEED.rolls,
       title: { uz: 'Rulon qog‘oz', ru: 'Рулонная бумага', en: 'Paper rolls' },
       text: {
@@ -33,6 +35,7 @@ export const products = {
     },
     {
       art: 'sheets',
+      page: 'board',
       need: NEED.sheets,
       title: { uz: 'Gofrokarton listlar', ru: 'Листы гофрокартона', en: 'Corrugated sheets' },
       text: {
@@ -47,6 +50,7 @@ export const products = {
     },
     {
       art: 'box',
+      page: 'boxes',
       need: NEED.boxes,
       title: { uz: 'Gofroqutilar (karton karobkalar)', ru: 'Гофрокороба (картонные коробки)', en: 'Corrugated cardboard boxes' },
       text: {
@@ -61,6 +65,7 @@ export const products = {
     },
     {
       art: 'branded',
+      page: 'printing',
       need: NEED.branded,
       title: { uz: 'Brendli qutilar (logotipli karobkalar)', ru: 'Коробки с логотипом', en: 'Branded boxes' },
       text: {

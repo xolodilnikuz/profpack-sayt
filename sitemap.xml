@@ -21,4 +21,109 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/"/>
   </url>
+  <url>
+    <loc>https://www.profpack.uz/karobka/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/karobka/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/korobki/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/boxes/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/ru/korobki/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/karobka/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/korobki/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/boxes/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/en/boxes/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/karobka/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/korobki/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/boxes/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/pechat/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/printing/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/ru/pechat/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/printing/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/en/printing/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/pechat/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/printing/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/gofrokarton/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/corrugated-board/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/ru/gofrokarton/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/corrugated-board/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/en/corrugated-board/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/gofrokarton/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/corrugated-board/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/rulon-qogoz/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/rulon-qogoz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/bumaga/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/paper-rolls/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/ru/bumaga/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/rulon-qogoz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/bumaga/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/paper-rolls/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/en/paper-rolls/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/rulon-qogoz/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/bumaga/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/paper-rolls/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/makulatura/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/waste-paper/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/ru/makulatura/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/waste-paper/"/>
+  </url>
+  <url>
+    <loc>https://www.profpack.uz/en/waste-paper/</loc>
+    <lastmod>2026-11-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="uz" href="https://www.profpack.uz/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.profpack.uz/ru/makulatura/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.profpack.uz/en/waste-paper/"/>
+  </url>
 </urlset>

@@ -16,6 +16,8 @@
 //  faq.js       — Savollar
 //  contact.js   — Aloqa va forma («Nima kerak?» ro‘yxati, xato xabarlari)
 //  footer.js    — Footer
+//  pages/       — alohida sahifalar: karobka, pechat, gofrokarton, rulon qog‘oz, makulatura
+//                 (har biri bitta faylda; manzillari — src/data/pages.js)
 // =====================================================================
 export * from './meta.js';
 export * from './common.js';
@@ -30,3 +32,4 @@ export * from './how.js';
 export * from './faq.js';
 export * from './contact.js';
 export * from './footer.js';
+export * from './pages/index.js';

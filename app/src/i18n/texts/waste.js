@@ -16,6 +16,8 @@ export const waste = {
   // need — bosilganda so‘rov formasidagi «Nima kerak?» tanlovi
   cta: { label: { uz: 'Makulatura topshirish', ru: 'Сдать макулатуру', en: 'Sell waste paper' }, need: NEED.waste },
   call: { uz: 'Qo‘ng‘iroq qilish', ru: 'Позвонить', en: 'Call us' },
+  // «Makulatura» sahifasiga havola (/makulatura/)
+  more: { uz: 'Makulatura qabul qilish haqida batafsil', ru: 'Подробнее о приёме макулатуры', en: 'More about selling us waste paper' },
 
   acceptTitle: { uz: 'Qabul qilamiz', ru: 'Принимаем', en: 'We accept' },
   accept: [

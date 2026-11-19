@@ -1,4 +1,5 @@
-// Brauzer sarlavhasi (title), qidiruv tizimlari uchun tavsif (meta description) va havola ulashilganda chiqadigan matn (og:…).
+// BOSH SAHIFA uchun: brauzer sarlavhasi (title), qidiruv tizimlari uchun tavsif (meta description) va havola
+// ulashilganda chiqadigan matn (og:…). Alohida sahifalarniki (karobka, pechat, makulatura …) — pages/<id>.js dagi meta.
 // Build paytida har til sahifasiga (/, /ru/, /en/) o‘z tilidagisi yoziladi (vite.config.js → prerender).
 // O‘zbekcha qiymatlarni index.html da ham bir xil qilib qo‘ying (`npm run dev` da o‘sha ko‘rinadi).
 //
@@ -13,9 +14,9 @@ export const meta = {
     en: 'Corrugated boxes and board manufacturer in Tashkent — Profpack',
   },
   description: {
-    uz: `Profpack zavodi, Toshkent: gofra karton karobkalar (qutilar) istalgan o‘lchamda, logotip bosish, gofrokarton va rulon qog‘oz. Tel: ${PHONE.display}.`,
-    ru: `Завод Profpack в Ташкенте: картонные коробки (гофрокороба) на заказ, печать логотипа, гофрокартон и рулонная бумага. Тел.: ${PHONE.display}.`,
-    en: `Profpack plant in Tashkent: custom-size corrugated cardboard boxes, logo printing, corrugated board and paper rolls. Tel: ${PHONE.display}.`,
+    uz: `Profpack zavodi, Toshkent: karton karobkalar istalgan o‘lchamda, karobkaga pechat, gofrokarton, rulon qog‘oz. Makulatura qabul qilamiz. Tel: ${PHONE.display}.`,
+    ru: `Завод Profpack в Ташкенте: картонные коробки на заказ, печать на коробках, гофрокартон, рулонная бумага. Принимаем макулатуру. Тел.: ${PHONE.display}.`,
+    en: `Profpack plant in Tashkent: custom corrugated boxes, logo printing, corrugated board and paper rolls. We buy waste paper. Tel: ${PHONE.display}.`,
   },
   // havola Telegram, WhatsApp va boshqalarda ulashilganda chiqadigan sarlavha va matn
   ogTitle: {

@@ -1,13 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLang } from '../i18n/LangProvider.jsx';
 import { LANGS } from '../i18n/lang.js';
-import { common, header, HEADER_NAV } from '../i18n/texts';
+import { common, header } from '../i18n/texts';
 import { PHONE } from '../data/site.js';
 import { LogoLink } from './Logo.jsx';
+import { useNav } from './useNav.js';
 
 // Yuqoridagi qotirilgan header: menyu, til almashtirgich, telefon, «Buyurtma berish», burger (mobil)
 export default function Header({ menuOpen, setMenu }) {
   const { lang, setLang, t } = useLang();
+  const items = useNav();
   const [scrolled, setScrolled] = useState(false);
   const burgerRef = useRef(null);
 
@@ -33,7 +35,7 @@ export default function Header({ menuOpen, setMenu }) {
       <div className="wrap">
         <LogoLink label={t(common.homeAria)} />
         <nav className="nav" aria-label={t(header.navAria)}>
-          {HEADER_NAV.map(item => <a key={item.href} href={item.href}>{t(item)}</a>)}
+          {items.map(item => <a key={item.key} href={item.href} aria-current={item.current ? 'page' : undefined}>{item.label}</a>)}
         </nav>
         <div className="lang" role="group" aria-label={header.langAria}>
           {LANGS.map(l => (

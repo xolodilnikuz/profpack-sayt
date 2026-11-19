@@ -6,7 +6,7 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/((?!static/|assets/|ru/?$|en/?$)[^.]+)",
+      "source": "/((?!static/|assets/|ru/?$|en/?$|karobka/?$|pechat/?$|gofrokarton/?$|rulon-qogoz/?$|makulatura/?$|ru/korobki/?$|ru/pechat/?$|ru/gofrokarton/?$|ru/bumaga/?$|ru/makulatura/?$|en/boxes/?$|en/printing/?$|en/corrugated-board/?$|en/paper-rolls/?$|en/waste-paper/?$)[^.]+)",
       "destination": "/",
       "permanent": true
     }

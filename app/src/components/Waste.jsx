@@ -10,9 +10,26 @@ const Cross = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="#7A2E22" strokeWidth="2.2" strokeLinecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17" /></svg>
 );
 
-// ===== Makulatura topshiring =====
-export default function Waste() {
+// «Qabul qilamiz» / «Qabul qilmaymiz» ro‘yxatlari (bosh sahifa va «Makulatura» sahifasida bir xil)
+export function WasteLists() {
   const { t } = useLang();
+  return (
+    <div className="lists">
+      <div className="list">
+        <h3>{t(waste.acceptTitle)}</h3>
+        <ul>{waste.accept.map((x, i) => <li key={i}><Check />{t(x)}</li>)}</ul>
+      </div>
+      <div className="list list--no">
+        <h3>{t(waste.rejectTitle)}</h3>
+        <ul>{waste.reject.map((x, i) => <li key={i}><Cross />{t(x)}</li>)}</ul>
+      </div>
+    </div>
+  );
+}
+
+// ===== Makulatura topshiring (bosh sahifa) =====
+export default function Waste() {
+  const { t, href } = useLang();
   const pickNeed = usePickNeed();
   return (
     <section className="sec waste kraft-tex" id="makulatura">
@@ -25,17 +42,9 @@ export default function Waste() {
             <a className="btn btn--navy" href="#aloqa" onClick={pickNeed(waste.cta.need)}>{t(waste.cta.label)}</a>
             <a className="btn btn--navy-line" href={`tel:${PHONE.tel}`}>{t(waste.call)}</a>
           </div>
+          <a className="more more--ink" href={href('waste')}>{t(waste.more)}</a>
         </div>
-        <div className="lists">
-          <div className="list">
-            <h3>{t(waste.acceptTitle)}</h3>
-            <ul>{waste.accept.map((x, i) => <li key={i}><Check />{t(x)}</li>)}</ul>
-          </div>
-          <div className="list list--no">
-            <h3>{t(waste.rejectTitle)}</h3>
-            <ul>{waste.reject.map((x, i) => <li key={i}><Cross />{t(x)}</li>)}</ul>
-          </div>
-        </div>
+        <WasteLists />
       </div>
     </section>
   );

@@ -23,7 +23,8 @@ export const hero = {
 };
 
 // bosqichlar (tartib 3D animatsiya bilan bog‘liq — 5 ta qolishi kerak).
-// tracker — pastdagi bosqichlar chizig‘idagi qisqa nomi; cta — bosqich ostidagi tugma (ixtiyoriy)
+// tracker — pastdagi bosqichlar chizig‘idagi qisqa nomi; cta — bosqich ostidagi tugma (ixtiyoriy);
+// more — shu bosqich mahsulotining alohida sahifasiga havola (page — src/data/pages.js dagi id)
 export const steps = [
   {
     tracker: { uz: 'Makulatura', ru: 'Макулатура', en: 'Waste paper' },
@@ -39,6 +40,7 @@ export const steps = [
       { uz: 'MS-7B — kitob, jurnal', ru: 'МС-7Б — книги, журналы', en: 'MS-7B — books, magazines' },
       { uz: 'MS-8V — gazetalar', ru: 'МС-8В — газеты', en: 'MS-8V — newspapers' },
     ],
+    more: { page: 'waste', label: { uz: 'Makulatura qabul qilish shartlari', ru: 'Условия приёма макулатуры', en: 'How we buy waste paper' } },
   },
   {
     tracker: { uz: 'Rulon qog‘oz', ru: 'Рулонная бумага', en: 'Paper rolls' },
@@ -54,6 +56,7 @@ export const steps = [
       { uz: 'Presslash va quritish', ru: 'Прессование и сушка', en: 'Pressing and drying' },
       { uz: 'Rulonga o‘rash', ru: 'Намотка в рулоны', en: 'Winding into rolls' },
     ],
+    more: { page: 'paper', label: { uz: 'Rulon qog‘oz haqida batafsil', ru: 'Подробнее о рулонной бумаге', en: 'More about paper rolls' } },
   },
   {
     tracker: { uz: 'Gofrokarton', ru: 'Гофрокартон', en: 'Corrugated board' },
@@ -68,6 +71,7 @@ export const steps = [
       { uz: '5 qatlamli (P)', ru: '5-слойный (П)', en: '5-layer (P)' },
       { uz: 'Kraxmal yelim', ru: 'Крахмальный клей', en: 'Starch adhesive' },
     ],
+    more: { page: 'board', label: { uz: 'Gofrokarton listlar haqida batafsil', ru: 'Подробнее о гофрокартоне', en: 'More about corrugated board' } },
   },
   {
     tracker: { uz: 'Quti', ru: 'Коробка', en: 'Box' },
@@ -82,6 +86,7 @@ export const steps = [
       'FEFCO 0427',
       { uz: 'Lotok va panjaralar', ru: 'Лотки и решётки', en: 'Trays and partitions' },
     ],
+    more: { page: 'boxes', label: { uz: 'Karobka turlari va narxi', ru: 'Виды и цены коробок', en: 'Box types and prices' } },
   },
   {
     tracker: { uz: 'Pechat', ru: 'Печать', en: 'Printing' },
@@ -96,6 +101,7 @@ export const steps = [
       { uz: 'Logotip va markirovka', ru: 'Логотип и маркировка', en: 'Logo and markings' },
       { uz: 'Shtrix- va QR-kod', ru: 'Штрих- и QR-коды', en: 'Barcodes and QR codes' },
     ],
+    more: { page: 'printing', label: { uz: 'Karobkaga pechat haqida batafsil', ru: 'Подробнее о печати на коробках', en: 'More about printing on boxes' } },
     // need — bosilganda so‘rov formasidagi «Nima kerak?» tanlovi
     cta: { label: { uz: 'Brendli quti buyurtma qilish', ru: 'Заказать коробки с логотипом', en: 'Order branded boxes' }, need: NEED.branded },
   },

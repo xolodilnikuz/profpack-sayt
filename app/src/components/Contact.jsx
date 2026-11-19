@@ -4,7 +4,8 @@ import { PHONE, TELEGRAM, EMAIL, ADDRESS, HOURS } from '../data/site.js';
 import OrderForm from './OrderForm.jsx';
 
 // ===== Aloqa: kontaktlar ro‘yxati + so‘rov formasi =====
-export default function Contact() {
+// lead — sarlavha ostidagi matn (berilmasa — texts/contact.js dagi umumiy matn)
+export default function Contact({ lead = contact.lead }) {
   const { t } = useLang();
   const L = contact.labels;
   return (
@@ -12,7 +13,7 @@ export default function Contact() {
       <div className="wrap contact__grid">
         <div>
           <h2>{t(contact.title)}</h2>
-          <p className="contact__lead">{t(contact.lead)}</p>
+          <p className="contact__lead">{t(lead)}</p>
           <ul className="contacts">
             <li><span>{t(L.phone)}</span><a href={`tel:${PHONE.tel}`}>{PHONE.display}</a></li>
             <li><span>{t(L.telegram)}</span><a href={TELEGRAM.url} target="_blank" rel="noopener">{TELEGRAM.handle}</a></li>
