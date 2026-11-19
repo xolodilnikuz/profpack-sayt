@@ -37,7 +37,7 @@ export const form = {
   name: { uz: 'Ismingiz', ru: 'Ваше имя', en: 'Your name' },
   namePh: { uz: 'Ism Familiya', ru: 'Имя Фамилия', en: 'First and last name' },
   phone: { uz: 'Telefon', ru: 'Телефон', en: 'Phone' },
-  phonePh: '+998 __ ___ __ __',
+  phonePh: '__ ___ __ __',   // +998 maydon oldida doim turadi (src/lib/phone.js)
   company: { uz: 'Kompaniya', ru: 'Компания', en: 'Company' },
   companyPh: { uz: 'Ixtiyoriy', ru: 'Необязательно', en: 'Optional' },
   need: { uz: 'Nima kerak?', ru: 'Что нужно?', en: 'What do you need?' },
