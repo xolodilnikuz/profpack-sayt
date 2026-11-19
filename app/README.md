@@ -33,21 +33,24 @@ Kerak bo‘ladi: [Node.js](https://nodejs.org) 18 yoki undan yangi.
 (≈65 MB, 3 000 dan ortiq fayl) ham OneDrive'ga yuklanadi. Ishlaydi, lekin sekinlashtiradi. Repozitoriyni OneDrive'dan
 tashqaridagi papkaga (masalan, `C:\dev\profpack-sayt`) klonlab, o‘sha yerda ishlash qulayroq.
 
-## Tayyor HTML (qidiruv tizimlari uchun)
+## Tillar va tayyor HTML (qidiruv tizimlari uchun)
 
-`npm run build` sahifani bir marta Node'da chizib, natijani `index.html` ichiga yozadi (`vite.config.js` → `prerender`,
-`src/entry-server.jsx`). Shuning uchun sahifa matni JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari uni o‘qiydi,
-sekin internetda matn darhol ko‘rinadi. Brauzerda React shu tayyor HTML'ni "jonlantiradi" (`src/main.jsx`).
+Har til o‘z manzilida turadi: `/` — o‘zbekcha, `/ru/` — ruscha, `/en/` — inglizcha. `npm run build` sahifani har til uchun
+bir martadan Node'da chizib, uchta fayl yozadi: `index.html`, `ru/index.html`, `en/index.html` (`vite.config.js` → `prerender`,
+`src/entry-server.jsx`). Shuning uchun matn JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari uchala tilni alohida
+sahifa sifatida o‘qiydi, sekin internetda matn darhol ko‘rinadi. Brauzerda React shu tayyor HTML'ni "jonlantiradi" (`src/main.jsx`).
 
-- Tayyor HTML — o‘zbekcha (asosiy til). Ruscha yoki inglizcha tanlangan bo‘lsa, sahifa o‘sha tilda qayta chiziladi.
-- Buning uchun alohida hech narsa qilish shart emas: matnni o‘zgartirib `npm run build` qilsangiz, tayyor HTML ham yangilanadi.
+- Til tugmalari sahifani qayta yuklamaydi, faqat manzilni almashtiradi (`src/i18n/lang.js`). Eski `?lang=ru` havolalari ham ishlaydi.
+- Har sahifaga o‘z tilidagi sarlavha va tavsif (`src/i18n/texts/meta.js`), `hreflang` havolalari, `sitemap.xml` va kompaniya
+  ma’lumoti (`BUSINESS` — `src/data/site.js`) build paytida o‘zi yoziladi. Sayt manzili — `SITE_URL` (`src/data/site.js`).
+- Buning uchun alohida hech narsa qilish shart emas: matnni o‘zgartirib `npm run build` qilsangiz, uchala sahifa ham yangilanadi.
 - Komponent chizilayotganda (`return` dan oldin) `window`, `document`, `localStorage` ishlatilmasin — ular faqat
   `useEffect` yoki hodisa ishlovchilari (onClick …) ichida bo‘lsin, aks holda build xato beradi.
 
 ## Saytga chiqarish
 
 1. `app/` ichida o‘zgartiring, `npm run dev` bilan tekshiring.
-2. `npm run build` — repo ildiziga `index.html`, `static/`, `assets/`, `.nojekyll` yoziladi (eski `static/` avval o‘chiriladi).
+2. `npm run build` — repo ildiziga `index.html`, `ru/`, `en/`, `static/`, `assets/`, sayt belgisi, `robots.txt`, `sitemap.xml` yoziladi (eski `static/` avval o‘chiriladi).
 3. `app/` va ildizdagi shu fayllarni commit qilib, `main` ga push qiling.
 4. GitHub Pages taxminan bir daqiqada yangilanadi.
 

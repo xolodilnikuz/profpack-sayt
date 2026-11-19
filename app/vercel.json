@@ -6,7 +6,7 @@
   "outputDirectory": "dist",
   "redirects": [
     {
-      "source": "/((?!static/|assets/)[^.]+)",
+      "source": "/((?!static/|assets/|ru/?$|en/?$)[^.]+)",
       "destination": "/",
       "permanent": true
     }

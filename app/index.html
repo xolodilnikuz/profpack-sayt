@@ -20,19 +20,25 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Saira:wdth,wght@50..100,500..800&family=Tektur:wdth,wght@75..100,500..800&display=swap">
 <script>
-  // til: ?lang= → saqlangan tanlov → brauzer tili (inglizcha faqat tanlansa — mahalliy mijozlar uchun asosiy til o‘zbekcha)
+  // Til: manzil (/ru/, /en/) → ?lang= (eski havolalar) → saqlangan tanlov → brauzer tili (faqat ruscha) → o‘zbekcha.
+  // Inglizcha faqat tanlansa yoki /en/ ochilsa — mahalliy mijozlar uchun asosiy til o‘zbekcha.
   // React yuklanishidan oldin ishlaydi: <html lang> darhol to‘g‘ri bo‘ladi (ruscha sarlavha shrifti miltillamaydi).
   // Xuddi shu tartib src/i18n/lang.js da ham bor.
   try {
-    var l = new URLSearchParams(location.search).get('lang') || localStorage.getItem('pp-lang');
+    var html = document.documentElement;
+    var m = location.pathname.match(/^(.*\/)(ru|en)\/?(?:index\.html)?$/);
+    var l = m ? m[2] : (new URLSearchParams(location.search).get('lang') || localStorage.getItem('pp-lang'));
     if (l !== 'ru' && l !== 'uz' && l !== 'en') l = /^ru\b/i.test(navigator.language || '') ? 'ru' : 'uz';
-    document.documentElement.lang = l;
+    // data-page — shu sahifaga yozilgan tayyor HTML tili (build qo‘yadi). Kerakli til boshqa bo‘lsa — pp-swap
+    var page = html.getAttribute('data-page');
+    if (page && page !== l) html.className += ' pp-swap';
+    html.lang = l;
   } catch (e) {}
 </script>
 <style>
-  /* Build qilingan sahifada #root ichida tayyor o‘zbekcha HTML bo‘ladi (vite.config.js → prerender).
-     Boshqa tilda (ru/en) React sahifani o‘sha tilda chizguncha uni ko‘rsatmaymiz — til "sakrab" almashmasin. */
-  html:not([lang="uz"]) #root[data-prerendered]{visibility:hidden}
+  /* Build qilingan har sahifada (/, /ru/, /en/) #root ichida o‘z tilidagi tayyor HTML bo‘ladi (vite.config.js → prerender).
+     Kerakli til boshqa bo‘lsa (pp-swap), React sahifani o‘sha tilda chizguncha uni ko‘rsatmaymiz — til "sakrab" almashmasin. */
+  html.pp-swap #root[data-prerendered]{visibility:hidden}
 </style>
 <!-- JavaScript o‘chirilgan bo‘lsa: bosh sarlavha animatsiyasiz, darhol ko‘rinadi.
      #root — asosiy CSS bu yerdan keyin ulanadi, shuning uchun qoida undan "kuchliroq" bo‘lishi kerak -->
@@ -46,14 +52,17 @@
     var html = document.documentElement, root = document.getElementById('root');
     if (!root.hasAttribute('data-prerendered')) return;
     var loaded = function () { requestAnimationFrame(function () { html.classList.add('is-loaded'); }); };
-    if (html.lang === 'uz') {
-      // tayyor o‘zbekcha matn darhol ko‘rinadi: bosh sarlavha animatsiyasi shriftlar yuklangach boshlanadi (ko‘pi bilan 1,2 s)
+    if (!html.classList.contains('pp-swap')) {
+      // tayyor matn darhol ko‘rinadi: bosh sarlavha animatsiyasi shriftlar yuklangach boshlanadi (ko‘pi bilan 1,2 s)
       if (document.fonts && window.Promise) Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 1200); })]).then(loaded);
       else loaded();
     } else {
-      // boshqa tilda tayyor HTML yashirin turadi. JavaScript 4 soniyada yuklanmasa (sekin internet) — o‘zbekchasini ko‘rsatamiz
+      // kerakli til boshqa — tayyor HTML yashirin turadi. JavaScript 4 soniyada yuklanmasa (sekin internet) — sahifaning o‘z tilidagisini ko‘rsatamiz
       setTimeout(function () {
-        if (root.hasAttribute('data-prerendered')) { root.removeAttribute('data-prerendered'); loaded(); }
+        if (!html.classList.contains('pp-swap')) return;
+        html.classList.remove('pp-swap');
+        html.lang = html.getAttribute('data-page');
+        loaded();
       }, 4000);
     }
   })();
