@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createLogger, createServer, defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { SITE_URL } from './src/data/site.js';
+import { BUSINESS, PHONE, SITE_URL } from './src/data/site.js';
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 const PUBLIC_DIR = fileURLToPath(new URL('./public', import.meta.url));
@@ -33,6 +33,58 @@ function copyPublic() {
   };
 }
 
+// Qidiruv tizimlari uchun fayllar — sayt manzili (SITE_URL) bo‘yicha build paytida yoziladi:
+//  • robots.txt — saytni o‘qishga ruxsat va sayt xaritasi manzili;
+//  • sitemap.xml — sayt xaritasi (bitta sahifa), sanasi — build kuni.
+function seoFiles() {
+  return {
+    name: 'profpack-seo-files',
+    apply: 'build',
+    generateBundle() {
+      const today = new Date().toISOString().slice(0, 10);
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}sitemap.xml\n` });
+      this.emitFile({
+        type: 'asset',
+        fileName: 'sitemap.xml',
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${SITE_URL}</loc><lastmod>${today}</lastmod></url>\n</urlset>\n`,
+      });
+    },
+  };
+}
+
+// Kompaniya ma’lumoti qidiruv tizimlari tushunadigan ko‘rinishda (schema.org JSON-LD): nomi, manzili, telefoni, ish vaqti.
+// Ma’lumot src/data/site.js dan olinadi (BUSINESS, PHONE) — sahifadagi aloqa bo‘limi bilan bir xil bo‘lishi kerak.
+function jsonLd() {
+  const logo = `${SITE_URL}assets/profpack-logo.png`;
+  const data = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebSite', '@id': `${SITE_URL}#website`, url: SITE_URL, name: BUSINESS.name, inLanguage: ['uz', 'ru', 'en'], publisher: { '@id': `${SITE_URL}#org` } },
+      {
+        '@type': ['Organization', 'LocalBusiness'],
+        '@id': `${SITE_URL}#org`,
+        name: BUSINESS.name,
+        url: SITE_URL,
+        logo,
+        image: logo,
+        description: BUSINESS.description,
+        telephone: PHONE.tel,
+        address: { '@type': 'PostalAddress', streetAddress: BUSINESS.street, addressLocality: BUSINESS.city, addressCountry: BUSINESS.country },
+        openingHoursSpecification: [{
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+          opens: BUSINESS.opens,
+          closes: BUSINESS.closes,
+        }],
+        contactPoint: { '@type': 'ContactPoint', telephone: PHONE.tel, contactType: 'sales', availableLanguage: ['uz', 'ru', 'en'] },
+        areaServed: BUSINESS.country,
+      },
+    ],
+  };
+  // "<" belgisi skript ichida HTML tegi bo‘lib qolmasligi uchun almashtiriladi
+  return `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>`;
+}
+
 // Tayyor HTML (prerender): build paytida sahifa Node'da bir marta chiziladi (src/entry-server.jsx, o‘zbekcha)
 // va index.html dagi <div id="root"> ichiga yoziladi. Brauzerda React shu HTML'ni "jonlantiradi" (src/main.jsx).
 // Shunda sahifa matni JavaScript'siz ham HTML ichida bo‘ladi: qidiruv tizimlari o‘qiydi, sekin internetda darhol ko‘rinadi.
@@ -50,7 +102,7 @@ function prerender() {
     transformIndexHtml: {
       order: 'post',
       async handler(html) {
-        for (const part of [ROOT_DIV, OG_IMAGE]) if (!html.includes(part)) throw new Error(`index.html da ${part} topilmadi — prerender qilib bo‘lmadi`);
+        for (const part of [ROOT_DIV, OG_IMAGE, '</head>']) if (!html.includes(part)) throw new Error(`index.html da ${part} topilmadi — prerender qilib bo‘lmadi`);
         // komponentlarni Node'da ishga tushirish uchun vaqtinchalik Vite serveri (port ochmaydi, fayllarni kuzatmaydi)
         const server = await createServer({
           configFile: false,
@@ -67,6 +119,7 @@ function prerender() {
           return html
             .replace(OG_IMAGE, () => `content="${SITE_URL}assets/profpack-logo.png"`)
             .replace(OG_IMAGE_TAG, () => `<link rel="canonical" href="${SITE_URL}">\n<meta property="og:url" content="${SITE_URL}">\n${OG_IMAGE_TAG}`)
+            .replace('</head>', () => `${jsonLd()}\n</head>`)
             .replace(ROOT_DIV, () => `<div id="root" data-prerendered>${app}</div>`);
         } finally {
           await server.close();
@@ -90,7 +143,7 @@ export default defineConfig({
   // nisbiy yo‘llar: sayt istalgan manzilda ishlaydi (GitHub Pages /profpack-sayt/ yoki o‘z domeni)
   base: './',
   customLogger: logger,
-  plugins: [react(), copyPublic(), prerender()],
+  plugins: [react(), copyPublic(), seoFiles(), prerender()],
   build: {
     outDir: OUT_DIR,
     emptyOutDir: false,          // ildizdagi boshqa fayllarga tegmaymiz; eski static/ ni scripts/clean.mjs o‘chiradi

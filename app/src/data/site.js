@@ -35,6 +35,19 @@ export const HOURS = {
 // (backend kodi: apps-script/Code.gs). Bo‘sh bo‘lsa, forma mijozga qo‘ng‘iroq qilishni so‘raydi (so‘rov yo‘qolib ketmasligi uchun).
 export const FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw9UkDTU3-cKmIljEtMR3szTTWMQbmoJkLFaE36kxWZz7A3ucOsLosOmy0TezfDDkyT0w/exec';
 
+// Qidiruv tizimlari uchun kompaniya ma’lumoti: build paytida index.html ga yoziladi (JSON-LD, vite.config.js).
+// Sahifada ko‘rinib turgan ma’lumot (aloqa bo‘limi) bilan bir xil bo‘lishi kerak; manzil qismlarga bo‘lingan.
+export const BUSINESS = {
+  name: 'Profpack',
+  description: 'To‘liq siklli qadoq zavodi: makulaturani qayta ishlash, rulon qog‘oz, gofrokarton, gofroqutilar va brendli bosma qutilar.',
+  street: 'Kanora ko‘chasi, 3-uy, Yangihayot tumani',
+  city: 'Toshkent',
+  country: 'UZ',
+  opens: '08:00',     // har kuni
+  closes: '18:00',
+};
+
 // saytning asosiy manzili (oxirida "/" bilan). Build paytida index.html ga yoziladi: canonical, og:url, og:image.
+// robots.txt va sitemap.xml ham shu manzil bilan yaratiladi.
 // apps-script/Code.gs dagi SITE_URL bilan bir xil bo‘lsin — Telegram bot shu havolani yuboradi.
 export const SITE_URL = 'https://www.profpack.uz/';
